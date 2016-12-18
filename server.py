@@ -48,7 +48,7 @@ class FileFolderHandler(tornado.web.RequestHandler):
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
-    	self.request.remote_ip = self.headers['X-Real-Ip']
+        self.request.remote_ip = self.headers['X-Real-Ip']
         if self.request.remote_ip not in clients['ips']:
             print("%s linked to host%s"%self.request.remote_ip)
             clients['ips'].add(self.request.remote_ip)
